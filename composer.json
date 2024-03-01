@@ -1,0 +1,12 @@
+{
+    "name": "emir/phpiggy",
+    "description": "A PHP Expense Tracking Application",
+    "type": "project",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "FrameWork\\": "src/FrameWork",
+            "App\\": "src/App"
+        }
+    }
+}
