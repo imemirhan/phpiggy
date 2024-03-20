@@ -5,8 +5,15 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "FrameWork\\": "src/FrameWork",
+            "Framework\\": "src/Framework",
             "App\\": "src/App"
-        }
+        },
+        "files": [
+            "src/App/Config/Routes.php",
+            "src/App/Config/Middleware.php"
+        ]
+    },
+    "scripts": {
+        "phpiggy": "php cli.php"
     }
 }
