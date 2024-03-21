@@ -1,22 +1,22 @@
 <?php
 
+
+
 include __DIR__ . '/src/Framework/Database.php';
 
 use Framework\Database;
+use Dotenv\Dotenv;
+use App\Config\Paths;
 
-$db = new Database('mysql', [
-    'host' => 'localhost',
-    'port' => 3306,
-    'dbname' => 'phpiggy',
-], 'root', '');
+$dotenv = Dotenv::createImmutable(Paths::ROOT);
+$dotenv->load();
 
-$search = "Hats' OR 1=1 -- ";
-$query = "SELECT * FROM products WHERE name=:name";
+$db = new Database($_ENV['DB_DRIVER'], [
+    'host' => $_ENV['DB_HOST'],
+    'port' => $_ENV['DB_PORT'],
+    'dbname' => $_ENV['DB_NAME'],
+], $_ENV['DB_USER'], $_ENV['DB_PASS']);
 
-$stmt = $db->connection->prepare($query);
+$sqlfile = file_get_contents("./database.sql");
 
-$stmt->bindValue('name', $search, PDO::PARAM_STR);
-
-$stmt->execute();
-
-var_dump($stmt->fetchAll(PDO::FETCH_OBJ));
+$db->query($sqlfile);
