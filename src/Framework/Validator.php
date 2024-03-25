@@ -10,10 +10,12 @@ use Framework\Exceptions\ValidationException;
 class Validator
 {
     private array $rules = [];
+
     public function add(string $alias, RuleInterface $rule)
     {
         $this->rules[$alias] = $rule;
     }
+
     public function validate(array $formData, array $fields)
     {
         $errors = [];
@@ -40,6 +42,7 @@ class Validator
                 );
             }
         }
+
         if (count($errors)) {
             throw new ValidationException($errors);
         }
